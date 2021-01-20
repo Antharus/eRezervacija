@@ -16,7 +16,7 @@ Spaudžiame dešinį klavišą ant projekto -> Properties -> Java Build Path -> 
 
 4.Duomenų bazė
 
-(Postgres)
+	(Postgres)
 
 4.1 Parsisiunčiame Postgres 10.0 serverį ir jį susidiegiame, taip pat pgAdmin 4+
 
@@ -24,8 +24,8 @@ Spaudžiame dešinį klavišą ant projekto -> Properties -> Java Build Path -> 
 
 4.3 Atidaorme katik sukurtą duomenų bazę, viršuj lango spaudžiame Tools -> Query tool -> į atsidariusį langą įvedame testinius duomenis:
 
-CREATE TABLE public.doctor
-(
+	CREATE TABLE public.doctor
+	(
     id bigint NOT NULL,
     doctoroccupation character varying(255) COLLATE pg_catalog."default",
     doctorworkingstate character varying(255) COLLATE pg_catalog."default",
@@ -34,90 +34,92 @@ CREATE TABLE public.doctor
     version integer,
     state character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT doctor_pkey PRIMARY KEY (id)
-)
-WITH (
+	)
+	WITH (
     OIDS = FALSE
-)
-TABLESPACE pg_default;
+	)
+	TABLESPACE pg_default;
 
-ALTER TABLE public.doctor
+	ALTER TABLE public.doctor
     OWNER to postgres;
     
-INSERT INTO public.doctor(
+	INSERT INTO public.doctor(
 	id, doctoroccupation, doctorworkingstate, name, surname, version, state)
 	VALUES ('3','SURGEON','ACTIVE','Marius','Daukšas',0,'ACTIVE'), 
     ('2','CARDIOLOGIST','ACTIVE','Darius','Kazlauskas',0,'ACTIVE'),
     ('1','DERMATOLOGIST','ACTIVE','Vaidas','Morkūnas',0,'ACTIVE');
     
-CREATE SEQUENCE public.gen_doctor
+	CREATE SEQUENCE public.gen_doctor
     INCREMENT 1
     START 4
     MINVALUE 1
     MAXVALUE 9223372036854775807
     CACHE 1;
 
-ALTER SEQUENCE public.gen_doctor
+	ALTER SEQUENCE public.gen_doctor
     OWNER TO postgres;
     
 
 Visa kita automatiškai susikurs startuojant projektą.
 
 
-(MySQL)
+	(MySQL)
 
 4.1 Sukuriame schemą rezervacija
 
 4.2 Paleidžiame scriptą:
 
-CREATE TABLE person (
-  ID numeric(20,0),
-  name varchar(124) NOT NULL,
-  surname varchar(124) NOT NULL,
-  intValue integer default NULL,
-  personcode varchar(11) NOT NULL,
-  version integer default NULL,
-  PRIMARY KEY (ID)
-);
-CREATE INDEX IX_person on person(personcode);
+	CREATE TABLE person (
+  	ID numeric(20,0),
+	  name varchar(124) NOT NULL,
+	  surname varchar(124) NOT NULL,
+	  intValue integer default NULL,
+	  personcode varchar(11) NOT NULL,
+	  version integer default NULL,
+	  PRIMARY KEY (ID)
+	);
+	CREATE INDEX IX_person on person(personcode);
 
-CREATE TABLE doctor (
-  ID numeric(20,0),
-  doctoroccupation varchar(30) default NULL,
-  doctorworkingstate varchar(30) default NULL,
-  name varchar(124) default NULL,
-  surname varchar(124) default NULL,
-  version integer default NULL,
-  state varchar(255) default NULL,
-  PRIMARY KEY (ID)
-);
+	CREATE TABLE doctor (
+	  ID numeric(20,0),
+	  doctoroccupation varchar(30) default NULL,
+	  doctorworkingstate varchar(30) default NULL,
+	  name varchar(124) default NULL,
+	  surname varchar(124) default NULL,
+	  version integer default NULL,
+	  state varchar(255) default NULL,
+	  PRIMARY KEY (ID)
+	);
 
-CREATE TABLE meeting (
-  ID numeric(20,0),
-  meetingDate varchar(23) default '2000-01-01 00:00:00',
-  version integer default NULL,
-  person numeric(20,0),
-  doctor numeric(20,0),
-  canceled char(1) default 'f',
-  PRIMARY KEY (ID)
-);
+	CREATE TABLE meeting (
+	  ID numeric(20,0),
+	  meetingDate varchar(23) default '2000-01-01 00:00:00',
+	  version integer default NULL,
+	  person numeric(20,0),
+	  doctor numeric(20,0),
+	  canceled char(1) default 'f',
+	  PRIMARY KEY (ID)
+	);
 
-INSERT INTO `rezervacija`.`doctor`
-(`ID`,
-`doctoroccupation`,
-`doctorworkingstate`,
-`name`,
-`surname`,
-`version`,
-`state`)
-VALUES
-(1,'DERMATOLOGIST','ACTIVE','Vaidas','Morkunas',0,'ACTIVE'),
-(2,'CARDIOLOGIST','ACTIVE','Darius','Kazlauskas',0,'ACTIVE'),
-(3,'SURGEON','ACTIVE','Marius','Daukšas',0,'ACTIVE');
+	INSERT INTO `rezervacija`.`doctor`
+	(`ID`,
+	`doctoroccupation`,
+	`doctorworkingstate`,
+	`name`,
+	`surname`,
+	`version`,
+	`state`)
+	VALUES
+	(1,'DERMATOLOGIST','ACTIVE','Vaidas','Morkunas',0,'ACTIVE'),
+	(2,'CARDIOLOGIST','ACTIVE','Darius','Kazlauskas',0,'ACTIVE'),
+	(3,'SURGEON','ACTIVE','Marius','Daukšas',0,'ACTIVE');
 
 
 4.3 Užkomentuoti Person,Meeting,Doctor klasėse ID generavimo sequence sukūrimą:
-//	@SequenceGenerator(name = "GEN_PERSON", sequenceName = "GEN_PERSON")
-//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_PERSON")
+
+	@SequenceGenerator(name = "GEN_PERSON", sequenceName = "GEN_PERSON")
+	
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_PERSON")
 
 
 
@@ -139,15 +141,15 @@ Prieš nukopijuojant tekstą būtina pasikeisti, ar pasitikrinti, parametrus -> 
     
   (MySQL)
   
-  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver"
-		logAbandoned="true" maxIdle="30" maxTotal="200" maxWaitMillis="4000"
-		name="jdbc/eRezervacija" numTestsPerEvictionRun="10" password="root"
-		removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true"
-		removeAbandonedTimeout="300" testOnBorrow="true" testWhileIdle="true"
-		timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource"
-		url="jdbc:mysql://localhost:3306/rezervacija" username="root"
-		validationQuery="SELECT 1" />
-		
+	  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver"
+			logAbandoned="true" maxIdle="30" maxTotal="200" maxWaitMillis="4000"
+			name="jdbc/eRezervacija" numTestsPerEvictionRun="10" password="root"
+			removeAbandonedOnBorrow="true" removeAbandonedOnMaintenance="true"
+			removeAbandonedTimeout="300" testOnBorrow="true" testWhileIdle="true"
+			timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource"
+			url="jdbc:mysql://localhost:3306/rezervacija" username="root"
+			validationQuery="SELECT 1" />
+
     
     
 5. Maven Update
@@ -165,7 +167,7 @@ Jei naudojate MySQL pakeiskite maven dependency iš:
 
 5.0.2 (tik MySQL) perisistance.xml pakeičiame:
 
-<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />
+	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />
 
 Į MySQL atitinkantį duomenį bazės versiją. Dialektus galima rasti čia:
 
