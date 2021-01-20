@@ -23,7 +23,7 @@ public class Person implements IEntity<Long> {
 	private String surname;
 
 	@Column(length = 11)
-	private Integer personCode;
+	private String personCode;
 	
 	@Version
 	private Integer version;
@@ -52,11 +52,11 @@ public class Person implements IEntity<Long> {
 		this.surname = surname;
 	}
 
-	public Integer getPersonCode() {
+	public String getPersonCode() {
 		return personCode;
 	}
 
-	public void setPersonCode(Integer personCode) {
+	public void setPersonCode(String personCode) {
 		this.personCode = personCode;
 	}
 

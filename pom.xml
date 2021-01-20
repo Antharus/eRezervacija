@@ -81,13 +81,9 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.4.27.Final</version>
-			<scope>provided</scope>
-		</dependency>-->
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core <dependency> 
+			<groupId>org.hibernate</groupId> <artifactId>hibernate-core</artifactId> 
+			<version>5.4.27.Final</version> <scope>provided</scope> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -106,13 +102,10 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.11</version>
 		</dependency>
-		<dependency><!-- TODO -->
-			<groupId>com.szczytowski.genericdao</groupId>
-			<artifactId>genericdao</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>C:\Users\Sabot\Desktop\eclipse\ws\inno\eRezervacija4\WebContent\WEB-INF\lib\genericdao-1.0.jar</systemPath>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.10.0.pr3</version>
 		</dependency>
-
 	</dependencies>
 </project>

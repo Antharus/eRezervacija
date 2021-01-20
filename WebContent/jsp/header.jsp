@@ -5,10 +5,11 @@
 
 <style><%@include file="/css/main.css"%></style>
 
-<script src="../js/3.5.1jquery.min.js"></script>
-<script src="../js/3.4.1bootstrap.min.js"></script>
-<script src="../js/jquery-1.10.2.js"></script>
-<script src="../js/jquery-ui.js"></script>
+<script src="${pageContext.request.contextPath}/js/3.5.1jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/3.4.1bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-1.10.2.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.timepicker.min.js"></script>
 
 
 </head>

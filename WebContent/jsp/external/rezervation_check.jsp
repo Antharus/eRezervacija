@@ -13,40 +13,51 @@
 			<jsp:include page="/jsp/external/sideNavigation.jsp" />
 			<div class="col-sm-8 text-left">
 				<h1>Patikrinkite susitikimo laiką</h1>
-				<p>Pamiršote susitikimo datą ar laiką?</br>
-				Įveskite savo asmens duomenis su kuriais registravotės ir mes ją priminsime!</p>
+				<p>
+					Pamiršote susitikimo datą ar laiką?</br> Įveskite savo asmens duomenis
+					su kuriais registravotės ir mes ją priminsime!
+				</p>
 
 				<hr>
-				<form action="add" method="post">
-					<div class="form-table">
-						<div class="form-row">
-							<div class="form-label">Vardas:</div>
-							<div class="form-value">
-								<input type="text" name="name" required minlength="2">
+				<c:choose>
+					<c:when test="${message != null}">
+						<p class="${message.type.geCssClass()}">${message.content}</p>
+					</c:when>
+
+					<c:otherwise>
+						<form action="#" method="post">
+							<div class="form-table">
+								<div class="form-row">
+									<div class="form-label">Vardas:</div>
+									<div class="form-value">
+										<input type="text" name="name" required minlength="2">
+									</div>
+
+								</div>
+								<div class="form-row">
+									<div class="form-label">Pavarde:</div>
+									<div class="form-value">
+										<input type="text" name="surname" required minlength="2">
+									</div>
+
+								</div>
+								<div class="form-row">
+									<div class="form-label">Asmens kodas:</div>
+									<div class="form-value">
+										<input type="number" name="personCode" required minlength="11"
+											maxlength="11">
+									</div>
+
+								</div>
 							</div>
 
-						</div>
-						<div class="form-row">
-							<div class="form-label">Pavarde:</div>
-							<div class="form-value">
-								<input type="text" name="surname" required minlength="2">
+							<div class="form-buttons">
+								<input type="submit" value="Tikrinti">
 							</div>
 
-						</div>
-						<div class="form-row">
-							<div class="form-label">Asmens kodas:</div>
-							<div class="form-value">
-								<input type="number" name="personCode" required minlength="11" maxlength="11">
-							</div>
-
-						</div>
-					</div>
-
-					<div class="form-buttons">
-						<input type="submit" value="Tikrinti">
-					</div>
-
-				</form>
+						</form>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 

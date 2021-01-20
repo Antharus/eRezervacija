@@ -3,6 +3,7 @@ package com.leliva.model;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Meeting implements IEntity<Long> {
@@ -29,6 +32,17 @@ public class Meeting implements IEntity<Long> {
 
 	@OneToOne
 	private Doctor doctor;
+	
+	@Column(name="canceled", nullable = true) 
+	private boolean canceled;
+
+	public boolean isCanceled() {
+		return canceled;
+	}
+
+	public void setCanceled(boolean canceled) {
+		this.canceled = canceled;
+	}
 
 	public Doctor getDoctor() {
 		return doctor;
@@ -65,5 +79,13 @@ public class Meeting implements IEntity<Long> {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Meeting [id=" + id + ", meetingDate=" + meetingDate + ", version=" + version + ", person=" + person
+				+ ", doctor=" + doctor + "]";
+	}
+	
+	
 
 }

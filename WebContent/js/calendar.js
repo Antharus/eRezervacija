@@ -53,13 +53,14 @@ const renderCalendar = () => {
   }
 
   for (let i = 1; i <= lastDay; i++) {
+	  let displayMonth = date.getMonth()+1;
     if (
       i === new Date().getDate() &&
       date.getMonth() === new Date().getMonth()
     ) {
-      days += `<div class="today">${i}</div>`;
+      days += `<div class="today" date="${date.getFullYear() +"-"+ displayMonth +"-"+i}">${i}</div>`;
     } else {
-      days += `<div class="day">${i}</div>`;
+      days += `<div class="day" date="${date.getFullYear() +"-"+ displayMonth +"-"+i}">${i}</div>`;
     }
   }
 
@@ -82,15 +83,8 @@ document.querySelector(".next").addEventListener("click", () => {
 
 renderCalendar();
 
-$( ".day" ).click(function() {
-	  $.ajax({
-		  url:'dispatcher/check',
-		  type: "GET",
-	         data: { day: this.innerHTML },
-	        success: function (result) {
-	        	alert('s');
-	        },
-	        error: function (request, error) {
-	        }
-	    });
-	});
+$('.day, .today').on('click', function() {
+	$('.day.active').removeClass('active');
+	$('.today.active').removeClass('active');
+	$(this).addClass('active');
+});

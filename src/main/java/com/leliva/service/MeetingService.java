@@ -1,13 +1,28 @@
 package com.leliva.service;
 
+import java.util.Date;
+import java.util.List;
+
+import com.leliva.model.Doctor;
 import com.leliva.model.Meeting;
+import com.leliva.model.Person;
 
 public interface MeetingService {
 	
 	Meeting saveMeeting(Meeting meeting);
 	
-	Meeting getMeetingByPersonCode(Integer code);
+	List<Meeting> getMeetingsByPersonInfo(String name, String surname, String code);
 	
-	Meeting getMeetingByPersonInfo(String name, String surname, Integer code);
+	List<Meeting> getMeetingsByPersonInfo(Person p);
+	
+	List<Meeting> getMeetingsByDoctor(Long doctorId, Date date);
+	
+	Meeting getMeeting(String name, String surname, String code, Doctor doc, Date startDate, Date endDate);
+	
+	Meeting getMeeting(Person p, Doctor doc, Date startDate, Date endDate);
+
+	void cancelMeeting(Long meetingId, Long doctorId);
+
+	List<Date> getAvailableTimesByDoctor(Long doctorId, Date date);
 
 }

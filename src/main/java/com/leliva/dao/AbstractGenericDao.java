@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,7 +12,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -118,6 +122,16 @@ public abstract class AbstractGenericDao<T extends IEntity<I>, I extends Seriali
 
 	protected Class<T> getGenericClass() {
 		return clazz;
+	}
+	
+	public static <T> T getSingleResultOrNull(Query query) {
+	    query.setMaxResults(1);
+	    List<T> list = query.getResultList();
+	    if (list == null || list.isEmpty()) {
+	        return null;
+	    }
+
+	    return (T) list.get(0);
 	}
 
 }

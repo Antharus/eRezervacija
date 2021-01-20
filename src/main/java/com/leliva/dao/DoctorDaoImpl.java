@@ -10,7 +10,7 @@ import com.leliva.model.Doctor;
 import com.leliva.model.helpers.DoctorWorkingState;
 
 @Service
-public class DoctorDaoImpl extends GenericDao<Doctor, Long> implements DoctorDao {
+public class DoctorDaoImpl extends AbstractGenericDao<Doctor, Long> implements DoctorDao {
 
 	private static final String SELECT_ACTIVE_DOCTORS = "SELECT " //
 			+ "doc " //
@@ -19,7 +19,7 @@ public class DoctorDaoImpl extends GenericDao<Doctor, Long> implements DoctorDao
 			+ "WHERE "//
 			+ "state='" + DoctorWorkingState.ACTIVE + "'";
 	
-	private static final String SELECT_DOCTOR_BY_ID = "SELECT doc FROM Doctor doc WHERE id=:id";
+	private static final String SELECT_DOCTOR_BY_ID = "SELECT doc FROM Doctor doc WHERE doc.id=:id";
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -28,10 +28,10 @@ public class DoctorDaoImpl extends GenericDao<Doctor, Long> implements DoctorDao
 	}
 
 	@Override
-	public Doctor getDoctorById(String id) {
+	public Doctor getDoctorById(Long id) {
 		Query query = getEntityManager().createQuery(SELECT_DOCTOR_BY_ID);
 		query.setParameter("id", id);
-		Doctor d = (Doctor) query.getSingleResult();
+		Doctor d = getSingleResultOrNull(query);
 		return d;
 	}
 

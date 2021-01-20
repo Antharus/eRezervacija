@@ -8,6 +8,6 @@ public interface DoctorService {
 	
 	List<Doctor> getAllDoctors();
 	
-	Doctor getDoctorById(String id);
+	Doctor getDoctorById(Long id);
 
 }

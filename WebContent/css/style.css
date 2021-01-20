@@ -150,3 +150,27 @@ input[type=number] {
 .sidebar-navbar-nav li:hover>a {
 	color: black;
 }
+
+.message-success {
+	font-size: 22px;
+	color: #009C9F;
+}
+
+.message-failure {
+	font-size: 22px;
+	color: #9f0300;
+}
+
+.message-info {
+	font-size: 22px;
+	color: #1961b2;
+}
+
+.no-doctors-selected {
+	font-size: 14px;
+	color: #9f0300;
+}
+
+.meetingsList{
+	color: #404E67;
+}

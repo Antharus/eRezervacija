@@ -93,5 +93,13 @@ public class Doctor implements IEntity<Long> {
 		return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + ", doctorOccupation=" + doctorOccupation
 				+ ", state=" + state + ", version=" + version + "]";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (!(obj instanceof Doctor))
+	        return false;
+	    Doctor d = (Doctor) obj;
+	    return d.id.equals(this.id);
+	}
 
 }

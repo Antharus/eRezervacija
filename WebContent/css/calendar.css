@@ -9,7 +9,7 @@ html {
   font-size: 62.5%;
 }
 
-.container {
+.calendar-container.container {
   /*width: 100%;
   height: 100vh;
   background-color: #12121f;*/
@@ -80,7 +80,7 @@ html {
   padding: 0.2rem;
 }
 
-.days div:not(.today) {
+.days div:not(.today, .active) {
   font-size: 1.4rem;
   margin: 0.3rem;
   width: calc(40.2rem / 7);
@@ -91,8 +91,8 @@ html {
   text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
   transition: background-color 0.2s;
   background-color: #262626;
-	border: 0.2rem solid #222227;
-	cursor: pointer;
+  border: 0.2rem solid #222227;
+  cursor: pointer;
 }
 
 .days div:hover:not(.today) {
@@ -107,7 +107,7 @@ html {
 }
 
 .today {
-	  font-size: 1.4rem;
+  font-size: 1.4rem;
   margin: 0.3rem;
   width: calc(40.2rem / 7);
   height: 5rem;
@@ -116,9 +116,24 @@ html {
   align-items: center;
   text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
   transition: background-color 0.2s;
-	border: 0.2rem solid #262626;
-	background-color: #797979;
-	cursor: pointer;
-  
+  border: 0.2rem solid #262626;
+  background-color: #797979;
+  cursor: pointer; 
+}
+
+.day.active{
+  font-size: 1.4rem;
+  margin: 0.3rem;
+  width: calc(40.2rem / 7);
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+  transition: background-color 0.2s;
+  background-color: #262626;
+  border: 0.2rem solid #999664;
+  cursor: pointer;
+
 }
 
