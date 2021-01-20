@@ -1,6 +1,7 @@
 # eRezervacija
 
 Diegimo instrukcija (Eclipse):
+
 1. Importuojame projektą. 
 Spaudžiame File -> Import -> Existing Maven Projects -> Pasirenkame projekto lokacija -> Finish.
 
@@ -8,14 +9,19 @@ Spaudžiame File -> Import -> Existing Maven Projects -> Pasirenkame projekto lo
 Spaudžiame dešinį klavišą ant projekto -> Properties -> Java Build Path -> Libraries -> 2 Kartus paspaudžiame ant System Library -> Installed JREs -> Add -> Pasirenkame Java 8+ JDK lokaciją -> OK -> Finish -> OK
 
 3. Pridedame serverį
+
 3.1 Spaudžiame ant Servers tab'o -> "No Servers are available" -> Pasirenkame Tomcat v9.0 -> Pasirenkame Tomcat direktoriją kompiuteryje
+
 3.2 Spaudžiame dešinį klavišą ant pridėto serverio -> Add or remove... -> spaudižiame 2 kartus ant eRezervacija -> Finish
 
 4.Duomenų bazė
 
 (Postgres)
+
 4.1 Parsisiunčiame Postgres 10.0 serverį ir jį susidiegiame, taip pat pgAdmin 4+
+
 4.2 Atidarome pgAdmin, spaudžiame 2 kartus and PostgresSQL 10 -> dešinį pelės klavišą ant Databases -> Create -> Database -> Pavadiname kuriamą duomenų bazę "eRezervacija" ir spaudžiame Save
+
 4.3 Atidaorme katik sukurtą duomenų bazę, viršuj lango spaudžiame Tools -> Query tool -> į atsidariusį langą įvedame testinius duomenis:
 
 CREATE TABLE public.doctor
@@ -55,9 +61,14 @@ ALTER SEQUENCE public.gen_doctor
     
 
 Visa kita automatiškai susikurs startuojant projektą.
+
+
 (MySQL)
+
 4.1 Sukuriame schemą rezervacija
+
 4.2 Paleidžiame scriptą:
+
 CREATE TABLE person (
   ID numeric(20,0),
   name varchar(124) NOT NULL,
@@ -113,7 +124,9 @@ VALUES
 
 4.4 Eclipse atsidarome "Server" folderį -> redaguojame context.xml -> Pridedame tekstą į <Context> tag'ą:
 Prieš nukopijuojant tekstą būtina pasikeisti, ar pasitikrinti, parametrus -> password, url (jei pavadinote duomenų bazę kitaip, ar nurodėte kitą port'ą), username
+	
   (Postgres)
+  
 	<Resource auth="Container" driverClassName="org.postgresql.Driver"
 		logAbandoned="true" maxIdle="30" maxTotal="200" maxWaitMillis="4000"
 		name="jdbc/eRezervacija" numTestsPerEvictionRun="10" password="root"
@@ -122,8 +135,10 @@ Prieš nukopijuojant tekstą būtina pasikeisti, ar pasitikrinti, parametrus -> 
 		timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource"
 		url="jdbc:postgresql://localhost:5432/rezervacija" username="postgres"
 		validationQuery="SELECT 1" />
+		
     
   (MySQL)
+  
   <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver"
 		logAbandoned="true" maxIdle="30" maxTotal="200" maxWaitMillis="4000"
 		name="jdbc/eRezervacija" numTestsPerEvictionRun="10" password="root"
@@ -132,10 +147,14 @@ Prieš nukopijuojant tekstą būtina pasikeisti, ar pasitikrinti, parametrus -> 
 		timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource"
 		url="jdbc:mysql://localhost:3306/rezervacija" username="root"
 		validationQuery="SELECT 1" />
+		
     
     
 5. Maven Update
-5.0.1 (tik MySQL) Jei naudojate MySQL pakeiskite maven dependency iš:
+
+5.0.1 (tik MySQL)
+Jei naudojate MySQL pakeiskite maven dependency iš:
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -143,17 +162,25 @@ Prieš nukopijuojant tekstą būtina pasikeisti, ar pasitikrinti, parametrus -> 
 		</dependency>
     
 Į MySQL atitinkantį duomenį bazės versiją.
+
 5.0.2 (tik MySQL) perisistance.xml pakeičiame:
+
 <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />
+
 Į MySQL atitinkantį duomenį bazės versiją. Dialektus galima rasti čia:
+
 https://javabydeveloper.com/what-is-dialect-in-hibernate-and-list-of-dialects/#4-5-list-of-sql-dialects-in-hibernate-
 
 5.1 Spaudžiame dešinį klaviša ant projekto -> Maven -> Update Project -> Pasirenkame projektą ir spaudžiame OK
+
 5.2 Pasibaigus maven atnaujinimo darbams spaudžiame ant dešinį klavišą ant projekto -> Run as -> Maven build... -> į Goals įvedame "clean install" 
+
 5.3 Kai pamatome "BUILD SUCCESS" spaudžiame dešinį klavišą ant projekto -> Refresh
 
 6. Paleidimas
+
 6.1 Spaudžiame 2 kartus ant serverio -> Timeouts -> start=120, stop=120 -> spaudžiame ctrl + S
+
 6.2 Spaudžiame dešinį pelės klavišą ant serverio -> Start
 
 7. Projektas paleistas, jį galite pasiekti http://localhost:8080/eRezervacija/
